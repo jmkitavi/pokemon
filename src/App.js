@@ -4,6 +4,7 @@ import {
   StatusBar,
   FlatList,
   Text,
+  ActivityIndicator,
 } from 'react-native'
 import axios from 'axios'
 
@@ -85,7 +86,7 @@ const App = () => {
           sort={sort}
         />
 
-        {pokemons.length > 0 &&
+        {pokemons.length > 0 ?
           <FlatList
             initialNumToRender={3}
             data={data(pokemons)}
@@ -97,7 +98,8 @@ const App = () => {
             ListEmptyComponent={() =>
               <Text style={{ color: 'white' }}>Sorry! no pokemons</Text>
             }
-          />
+          /> :
+          <ActivityIndicator />
         }
       </SafeAreaView>
     </>

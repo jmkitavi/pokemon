@@ -17,6 +17,8 @@ const Header = ({ setSearch, setSort, sort }) => {
               onChangeText={(search) => setSearch(search)}
               style={styles.searchBar}
               autoFocus={true}
+              placeholder='Search'
+              placeholderTextColor='rgba(255,255,255, .5)'
             />
             <TouchableOpacity
               onPress={() => {
