@@ -38,3 +38,10 @@ Depending on you platform.
 
 
 Open the app on device or simulator to interact with.
+
+
+#### To Do
+ - Add walkthrough
+ - Icon and Splashscreen
+ - Share Card
+ - Tests
