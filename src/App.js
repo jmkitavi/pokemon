@@ -3,9 +3,11 @@ import {
   SafeAreaView,
   StatusBar,
   FlatList,
-  Text
 } from 'react-native'
 import axios from 'axios'
+
+import PokemonCard from './components/PokemonCard'
+import styles from './components/PokemonCard/styles'
 
 const App = () => {
   const [pokemons, setPokemons] = useState([])
@@ -25,19 +27,22 @@ const App = () => {
 
   return (
     <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
+      <StatusBar
+        barStyle='light-content'
+        backgroundColor='black'
+      />
+      <SafeAreaView style={styles.blackBg} >
         {pokemons.length > 0 &&
           <FlatList
-          initialNumToRender={3}
+            initialNumToRender={3}
             data={pokemons}
             renderItem={({ item }) =>
-              <Text>{item.name}</Text>
+              <PokemonCard pokemon={item} />
             }
             keyExtractor={item => item.id}
+            style={styles.blackBg}
           />
         }
-
       </SafeAreaView>
     </>
   )
