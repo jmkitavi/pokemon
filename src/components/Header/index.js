@@ -4,7 +4,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 
 import styles from './styles'
 
-const Header = () => {
+const Header = ({ setSearch }) => {
   const [searching, setSearching] = useState(false)
   const [sorting, setSorting] = useState(false)
 
@@ -14,11 +14,15 @@ const Header = () => {
         <View style={styles.searchContainer}>
             <MaterialIcons name='search' color='white' size={26}/>
             <TextInput
-              onChangeText={() => {}}
+              onChangeText={(search) => setSearch(search)}
               style={styles.searchBar}
+              autoFocus={true}
             />
             <TouchableOpacity
-              onPress={() => setSearching(false)}
+              onPress={() => {
+                setSearching(false)
+                setSearch(null)
+              }}
             >
               <MaterialIcons name='close' color='white' size={26}/>
             </TouchableOpacity>
@@ -29,7 +33,9 @@ const Header = () => {
 
         <View style={{ flexDirection: 'row' }}>
           <TouchableOpacity
-            onPress={() => setSearching(true)}
+            onPress={() => {
+              setSearching(true)
+            }}
             style={styles.button}
           >
             <MaterialIcons name='search' color='white' size={28}/>
