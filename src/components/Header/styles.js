@@ -46,6 +46,50 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: 'white',
   },
+
+  // Modal 
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: 'rgba(0, 0, 0, .5)'
+  },
+  modalView: {
+    backgroundColor: "white",
+    borderRadius: 20,
+    width: '65%',
+    alignItems: "center",
+    elevation: 5,
+    justifyContent: 'space-between',
+  },
+  modalHeader: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    lineHeight: 30,
+  },
+  modalContent: {
+    width: '100%',
+    paddingVertical: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+  },
+  modalFooter: {
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginTop: 10,
+  },
+  modalBtns: {
+    paddingHorizontal: 10,
+    margin: 10,
+    borderColor: 'black',
+    borderWidth: StyleSheet.hairlineWidth,
+    borderRadius: 10,
+  },
+  btnText: {
+    lineHeight: 25,
+  }
+
 })
 
 export default styles

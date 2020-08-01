@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
-import { View, Text, TouchableOpacity, TextInput } from 'react-native'
+import { View, Text, TouchableOpacity, TextInput, Modal } from 'react-native'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 
 import styles from './styles'
 
-const Header = ({ setSearch }) => {
+const Header = ({ setSearch, setSort, sort }) => {
   const [searching, setSearching] = useState(false)
-  const [sorting, setSorting] = useState(false)
+  const [sortModal, setSortModal] = useState(false)
 
   return (
     <View style={styles.container}>
@@ -42,12 +42,12 @@ const Header = ({ setSearch }) => {
           </TouchableOpacity>
 
           <TouchableOpacity
-            onPress={() => setSorting(true)}
+            onPress={() => setSortModal(true)}
             style={styles.button}
           >
             <MaterialIcons
               name='sort'
-              color={sorting ? 'rgb(255, 225, 101)' : 'white'}
+              color={sort ? 'rgb(255, 225, 101)' : 'white'}
               size={28}
             />
           </TouchableOpacity>
@@ -55,6 +55,60 @@ const Header = ({ setSearch }) => {
         </>
 
       )}
+
+      {/* Modal for choosing sort */}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={sortModal}
+      >
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Text style={styles.modalHeader}>Sorting by HP</Text>
+
+            <View style={styles.modalContent}>
+              <TouchableOpacity
+                style={[
+                  styles.modalBtns,
+                  sort === 'des' && { backgroundColor: 'gold' }
+                ]}
+                onPress={() => setSort('des')}
+              >
+                <Text style={styles.btnText}>Descending</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[
+                  styles.modalBtns,
+                  sort === 'asc' && { backgroundColor: 'gold' }
+                ]}
+                onPress={() => setSort('asc')}
+              >
+                <Text style={styles.btnText}>Ascending</Text>
+              </TouchableOpacity>
+            </View>
+
+            <View style={styles.modalFooter}>
+              <TouchableOpacity
+                style={styles.modalBtns}
+                onPress={() => {
+                  setSort(null)
+                  setSortModal(!sortModal)
+                }}
+              >
+                <Text style={styles.btnText}>Clear</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.modalBtns}
+                onPress={() => setSortModal(!sortModal)}
+              >
+                <Text style={styles.btnText}>Close</Text>
+              </TouchableOpacity>
+            </View>
+
+          </View>
+        </View>
+      </Modal>
+
     </View>
   )
 }

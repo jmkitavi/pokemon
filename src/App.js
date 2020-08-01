@@ -14,6 +14,7 @@ import styles from './components/PokemonCard/styles'
 const App = () => {
   const [pokemons, setPokemons] = useState([])
   const [search, setSearch] = useState(null)
+  const [sort, setSort] = useState(null)
 
   const getPokemons = async () => {
     const res = await axios.get(`https://api.pokemontcg.io/v1/cards`)
@@ -47,6 +48,30 @@ const App = () => {
     return pokemons
   }
 
+  const sortPokemons = (pokemons, sort) => {
+    if (sort === 'asc') {
+      return pokemons.sort((a, b) => a.hp - b.hp)
+    }
+    if (sort === 'des') {
+      return pokemons.sort((a, b) => b.hp - a.hp)
+    }
+
+    return pokemons
+  }
+
+  const data = (pokemons) => {
+    let formattedPokemons = [...pokemons]
+
+    if (search) {
+      return searchPokemons(formattedPokemons, search)
+    }
+    if (sort) {
+      return sortPokemons(formattedPokemons, sort)
+    }
+
+    return pokemons
+  }
+
   return (
     <>
       <StatusBar
@@ -56,12 +81,14 @@ const App = () => {
       <SafeAreaView style={[styles.blackBg, { flex: 1 }]} >
         <Header
           setSearch={setSearch}
+          setSort={setSort}
+          sort={sort}
         />
 
         {pokemons.length > 0 &&
           <FlatList
             initialNumToRender={3}
-            data={searchPokemons(pokemons, search)}
+            data={data(pokemons)}
             renderItem={({ item }) =>
               <PokemonCard pokemon={item} />
             }
