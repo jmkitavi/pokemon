@@ -14,9 +14,10 @@ import styles from './components/PokemonCard/styles'
 
 const App = () => {
   const [pokemons, setPokemons] = useState([])
-  const [search, setSearch] = useState(null)
-  const [sort, setSort] = useState(null)
+  const [search, setSearch] = useState(null) // search text
+  const [sort, setSort] = useState(null) // sort text (des or asc)
 
+  // fetch pokemons
   const getPokemons = async () => {
     const res = await axios.get(`https://api.pokemontcg.io/v1/cards`)
 
@@ -32,12 +33,14 @@ const App = () => {
   const searchPokemons = (pokemons, searchKey) => {
     if (searchKey) {
       return pokemons.filter(pokemon => Object.keys(pokemon).some(key => {
+
         // search types
         if (key === 'types') {
           return pokemon[key].map(type => {
             return type.toString().toLowerCase().includes(searchKey.toLowerCase())
           })[0]
         }
+
         // search other texts (name, subtype, supertype)
         if (typeof(pokemon[key]) !== 'object') {
           return pokemon[key].toString().toLowerCase().includes(searchKey.toLowerCase())

@@ -2,6 +2,7 @@ import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
   pokemonContainer: {
+    minHeight: 100,
     marginBottom: 10,
     borderRadius: 13,
     flexDirection: 'row',

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, Text, TouchableOpacity, TextInput, Modal } from 'react-native'
+import { View, Text, TouchableOpacity, TextInput } from 'react-native'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 
 import SortModal from './SortModal'
@@ -11,6 +11,7 @@ const Header = ({ setSearch, setSort, sort }) => {
 
   return (
     <View style={styles.container}>
+      {/* toggle between search bar and header icons */}
       {searching ? (
         <View style={styles.searchContainer}>
             <MaterialIcons name='search' color='white' size={26}/>
