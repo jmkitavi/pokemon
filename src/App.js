@@ -6,6 +6,7 @@ import {
 } from 'react-native'
 import axios from 'axios'
 
+import Header from './components/Header'
 import PokemonCard from './components/PokemonCard'
 import styles from './components/PokemonCard/styles'
 
@@ -31,7 +32,9 @@ const App = () => {
         barStyle='light-content'
         backgroundColor='black'
       />
-      <SafeAreaView style={styles.blackBg} >
+      <SafeAreaView style={[styles.blackBg, { flex: 1 }]} >
+        <Header />
+
         {pokemons.length > 0 &&
           <FlatList
             initialNumToRender={3}
