@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text, Image, ImageBackground, Dimensions } from 'react-native'
+import { View, Text, Image, ImageBackground, Dimensions, TouchableOpacity } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
+import ImageView from 'react-native-image-view'
 
 import styles from './styles'
 
@@ -9,6 +10,7 @@ const screenMargins = 2
 
 const PokemonCard = ({ pokemon }) => {
   const [height, setHeight] = useState()
+  const [fullImage, setFullImage] = useState(false)
 
   const getHeight = async () => {
     Image.getSize(pokemon.imageUrl, (width, height) => {
@@ -35,10 +37,14 @@ const PokemonCard = ({ pokemon }) => {
               styles.pokemonImage,
             ]}
           >
-            <View style={{
-              paddingBottom: 20,
-              height: height / 2,
-            }} />
+            <TouchableOpacity
+              style={{
+                paddingBottom: 20,
+                height: height / 2,
+              }}
+              // tapping on image opens full image modal
+              onPress={() => setFullImage(true)}
+            />
             <LinearGradient
               style={{ height: height / 2 }}
               colors={[
@@ -96,6 +102,19 @@ const PokemonCard = ({ pokemon }) => {
             </LinearGradient>
           </ImageBackground>
         }
+
+        {/* Full Image Modal  */}
+        <ImageView
+          images={[
+            {
+              source: { uri: pokemon.imageUrl },
+              title: pokemon.name,
+            }
+          ]}
+          imageIndex={0}
+          isVisible={fullImage}
+          onClose={() => setFullImage(false)}
+        />
       </View>
     </>
   )
